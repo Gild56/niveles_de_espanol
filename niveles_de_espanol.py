@@ -1,3 +1,4 @@
+# Niveles de Español
 
 # Connecting bibliotechs
 
@@ -5,7 +6,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from pygame import mixer
-import pygame 
+import pygame
 import os, sys
 from random import *
 pygame.init()
@@ -18,9 +19,6 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
 
     return os.path.join(base_path, relative_path)
-
-
-# Notes to not forget:   \n for a new line    Niveles de Español
 
 
 # Window
@@ -41,11 +39,11 @@ enter_sound = pygame.mixer.Sound(resource_path("click.wav"))
 click = pygame.mixer.Sound(resource_path("8bitclick.wav"))
 no = pygame.mixer.Sound(resource_path("no.mp3"))
 si = pygame.mixer.Sound(resource_path("si.mp3"))
-el_rio_fluye = pygame.mixer.Sound(resource_path("el_rio_fluye.mp3"))
+exercice_music = pygame.mixer.Sound(resource_path("el_rio_fluye.mp3"))
 test_music = pygame.mixer.Sound(resource_path("test.mp3"))
-lesson_music = pygame.mixer.Sound(resource_path("everyday_heroes.mp3"))
+lesson_music = pygame.mixer.Sound(resource_path("glorious_morning.mp3"))
 
-el_rio_fluye.set_volume(0.3)
+exercice_music.set_volume(0.3)
 
 menu_music.play(-1)
 
@@ -54,9 +52,9 @@ menu_music.play(-1)
 
 main_layout = QVBoxLayout()
 
-stats_layout = QHBoxLayout()
-true_answer_layout= QHBoxLayout()
-nothing_layout = QHBoxLayout()
+top_layout = QHBoxLayout()
+bottom_comments_layout= QHBoxLayout()
+top_comments_layout = QHBoxLayout()
 ans_layout1 = QHBoxLayout() # top
 ans_layout2 = QHBoxLayout() # bottom
 layout1 = QHBoxLayout() # top
@@ -66,13 +64,20 @@ layout3 = QHBoxLayout() # bottom
 
 # Variables
 
+language = 1 # 1 = Français, 2 = Українська
+lesson_page1 = ""
+lesson_page2 = ""
+lesson_page3 = ""
+lesson_page4 = ""
+lesson_page5 = ""
+lesson_page = 1
 test_finished = False
 test_note = 0
 test_notes = []
 test = False
 test_questions = 0
 tests = 0
-lessons_mode = True
+menu_mode = True
 note = 20
 notes = []
 right_ans_button = None
@@ -81,13 +86,12 @@ questions = 0
 true_answer_variable = ""
 
 
-# QLabels
+# QLabels (nothing help to alignement)
 
-nothing1 = QLabel("")
-nothing2 = QLabel("")
-nothing3 = QLabel("")
-nothing4 = QLabel("                                          ")
-true_answer = QLabel("")
+nothing1 = QLabel("") # quit button or it
+nothing2 = QLabel("") # visible in the answer verification
+top_comments_label = QLabel("")
+bottom_comments_label = QLabel("")
 top_of_screen = QLabel("Niveles de Español")
 stats = QLabel("v.1.2" + "\n"
     "Nota : -" + "\n"
@@ -96,39 +100,34 @@ stats = QLabel("v.1.2" + "\n"
 
 stats.setFont(QFont("Arial", 7))
 top_of_screen.setFont(QFont("Impact", 17))
-true_answer.setTextInteractionFlags(Qt.TextSelectableByMouse)
+top_comments_label.setFont(QFont("Arial", 15))
+bottom_comments_label.setFont(QFont("Arial", 15))
+
+bottom_comments_label.setTextInteractionFlags(Qt.TextSelectableByMouse)
 stats.setTextInteractionFlags(Qt.TextSelectableByMouse)
-true_answer.setFont(QFont("Arial", 15))
-nothing2.setFont(QFont("Arial", 15))
+bottom_comments_label.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
+
 nothing1.hide()
 nothing2.hide()
-nothing3.hide()
-nothing4.hide()
-true_answer.hide()
+top_comments_label.hide()
+bottom_comments_label.hide()
 
 
 # Buttons and line
 
-line = QLineEdit()
+answer_line = QLineEdit()
 
 ans_button1 = QPushButton("")   #top left button
 ans_button2 = QPushButton("")   #top right button
 ans_button3 = QPushButton("")   #bottom left button
 ans_button4 = QPushButton("")   #bottom right button
 
-lessons_button = QPushButton("Lecciónes")
+menu_mode_button = QPushButton("Lecciónes")
 ok_button = QPushButton("OK")
 send_answer_button = QPushButton("OK")
 quit_button = QPushButton("<--")
-
-ans_button1.hide()
-ans_button2.hide()
-ans_button3.hide()
-ans_button4.hide()
-ok_button.hide()
-send_answer_button.hide()
-line.hide()
-quit_button.hide()
+next_button = QPushButton("Siguiente")
+change_of_language_button = QPushButton("Français")
 
 button01 = QPushButton("Verbos normales")
 button02 = QPushButton("Verbos irregulares")
@@ -143,13 +142,76 @@ button10 = QPushButton("Plural de los palabras")
 button11 = QPushButton("Fechas")
 button12 = QPushButton("¡Gran final!")
 
+ans_button1.hide()
+ans_button2.hide()
+ans_button3.hide()
+ans_button4.hide()
+ok_button.hide()
+send_answer_button.hide()
+answer_line.hide()
+quit_button.hide()
+next_button.hide()
+change_of_language_button.hide()
+
+
+# Buttons parameters
+
+button01.setFont(QFont("Arial", 10))
+button02.setFont(QFont("Arial", 10))
+button03.setFont(QFont("Arial", 10))
+button04.setFont(QFont("Arial", 10))
+button05.setFont(QFont("Arial", 10))
+button06.setFont(QFont("Arial", 10))
+button07.setFont(QFont("Arial", 10))
+button08.setFont(QFont("Arial", 10))
+button09.setFont(QFont("Arial", 10))
+button10.setFont(QFont("Arial", 10))
+button11.setFont(QFont("Arial", 10))
+button12.setFont(QFont("Arial", 10))
+
+button01.setFixedSize(165, 90)
+button02.setFixedSize(165, 90)
+button03.setFixedSize(165, 90)
+button04.setFixedSize(165, 90)
+button05.setFixedSize(165, 90)
+button06.setFixedSize(165, 90)
+button07.setFixedSize(165, 90)
+button08.setFixedSize(165, 90)
+button09.setFixedSize(165, 90)
+button10.setFixedSize(165, 90)
+button11.setFixedSize(165, 90)
+button12.setFixedSize(165, 90)
+
+ans_button1.setFixedSize(250, 80)
+ans_button2.setFixedSize(250, 80)
+ans_button3.setFixedSize(250, 80)
+ans_button4.setFixedSize(250, 80)
+
+ans_button1.setFont(QFont("Arial", 20))
+ans_button2.setFont(QFont("Arial", 20))
+ans_button3.setFont(QFont("Arial", 20))
+ans_button4.setFont(QFont("Arial", 20))
+
+menu_mode_button.setFont(QFont("Arial", 15))
+next_button.setFont(QFont("Arial", 15))
+change_of_language_button.setFont(QFont("Arial", 15))
+
+ok_button.setFixedSize(165, 80)
+answer_line.setFixedSize(570, 40)
+send_answer_button.setFixedSize(100, 40)
+next_button.setFixedSize(150, 70)
+quit_button.setFixedSize(100, 40)
+menu_mode_button.setFixedSize(150, 70)
+change_of_language_button.setFixedSize(165, 90)
+
 
 # Functions
 
-def lessons_button_clicked():
-    global lessons_mode
-    if lessons_mode:
-        lessons_mode = False
+def menu_mode_button_clicked():
+    global menu_mode
+    click.play()
+    if menu_mode:
+        menu_mode = False
         button01.setText("Un lección \n que habla de \n los verbos \n normales")
         button02.setText("Un lección \n que habla de \n los verbos \n irregulares")
         button03.setText("Un lección \n que habla de \n los verbos \n pronominales")
@@ -162,10 +224,10 @@ def lessons_button_clicked():
         button10.setText("Un lección \n que habla del \n plural de \n los palabras")
         button11.setText("Un lección \n que habla de \n las fechas")
         button12.hide()
-        nothing4.show()
-        lessons_button.setText("Ejercicios")
+        change_of_language_button.show()
+        menu_mode_button.setText("Ejercicios")
     else:
-        lessons_mode = True
+        menu_mode = True
         button01.setText("Verbos normales")
         button02.setText("Verbos irregulares")
         button03.setText("Verbos pronominales")
@@ -178,10 +240,17 @@ def lessons_button_clicked():
         button10.setText("Plural de los palabras")
         button11.setText("Fechas")
         button12.show()
-        nothing4.hide()
-        lessons_button.setText("Lecciónes")
+        change_of_language_button.hide()
+        menu_mode_button.setText("Lecciónes")
 
-def lesson(lesson="Nada"):
+def open_a_lesson(lesson1, lesson2=False, lesson3=False, lesson4=False, lesson5=False):
+    global lesson_page, lesson_page1, lesson_page2, lesson_page3, lesson_page4, lesson_page5
+    click.play()
+    lesson_page1 = lesson1
+    lesson_page2 = lesson2
+    lesson_page3 = lesson3
+    lesson_page4 = lesson4
+    lesson_page5 = lesson5
     menu_music.stop()
     lesson_music.play(-1)
     button01.hide()
@@ -195,10 +264,46 @@ def lesson(lesson="Nada"):
     button09.hide()
     button10.hide()
     button11.hide()
-    lessons_button.hide()
+    change_of_language_button.hide()
+    menu_mode_button.hide()
     quit_button.show()
-    true_answer.show()
-    true_answer.setText(lesson)
+    next_button.show()
+    bottom_comments_label.show()
+    bottom_comments_label.setText(lesson1)
+
+def next_page_of_lesson():
+    global lesson_page, lesson_page1, lesson_page2, lesson_page3, lesson_page4, lesson_page5
+    click.play()
+    if lesson_page == 1 and lesson_page2 != False:
+        lesson_page = 2
+        bottom_comments_label.setText(lesson_page2)
+
+    elif lesson_page == 2 and lesson_page3 != False:
+        lesson_page = 3
+        bottom_comments_label.setText(lesson_page3)
+
+    elif lesson_page == 3 and lesson_page4 != False:
+        lesson_page = 4
+        bottom_comments_label.setText(lesson_page4)
+
+    elif lesson_page == 4 and lesson_page5 != False:
+        lesson_page = 5
+        bottom_comments_label.setText(lesson_page5)
+
+    else:
+        lesson_page = 1
+        bottom_comments_label.setText(lesson_page1)
+
+def next_language():
+    global language
+    click.play()
+    if language == 1:
+        language = 2
+        change_of_language_button.setText("Українська")
+
+    else:
+        language = 1
+        change_of_language_button.setText("Français")
 
 def note_calculating():
     global test, notes, test_notes, test_note
@@ -218,7 +323,7 @@ def note_calculating():
             all_notes += test_notes[i]
         test_note = round(all_notes / len(test_notes), 2)
 
-def true_or_false(button_clicked=None):
+def answer_verification(button_clicked=None):
     global true_answer_variable, true_answer, exercice, test, test_notes
     click.play()
     ans_button1.hide()
@@ -226,15 +331,15 @@ def true_or_false(button_clicked=None):
     ans_button3.hide()
     ans_button4.hide()
     send_answer_button.hide()
-    line.hide()
+    answer_line.hide()
     if not test:
         nothing1.hide()
     stats.hide()
-    true_answer.show()
+    bottom_comments_label.show()
+    top_comments_label.show()
     nothing2.show()
-    nothing3.show()
     ok_button.show()
-    answer = line.text()
+    answer = answer_line.text()
     answer = answer.lower()
     if exercice < 8:
         if right_ans_button == button_clicked:
@@ -244,9 +349,8 @@ def true_or_false(button_clicked=None):
                 notes.append(20)
             else:
                 test_notes.append(20)
-            true_answer.setText("Bien!")
+            bottom_comments_label.setText("¡Bien!")
             wrong_answer = False
-            true_answer.setText("")
 
         else:
             wrong_answer = True
@@ -261,7 +365,7 @@ def true_or_false(button_clicked=None):
                     true_answer_variable = "Ser"
                 else:
                     true_answer_variable = "Estar"
-            true_answer.setText("La repuesta es " + str(true_answer_variable) + ".")
+            bottom_comments_label.setText("La repuesta es " + str(true_answer_variable) + ".")
 
     elif true_answer_variable == answer:
         top_of_screen.setText("Sí")
@@ -270,7 +374,7 @@ def true_or_false(button_clicked=None):
             notes.append(20)
         else:
             test_notes.append(20)
-        true_answer.setText("Bien!")
+        bottom_comments_label.setText("¡Bien!")
         wrong_answer = False
 
     else:
@@ -281,42 +385,59 @@ def true_or_false(button_clicked=None):
             notes.append(0)
         else:
             test_notes.append(0)
-        true_answer.setText("La repuesta es " + str(true_answer_variable) + ".")
+        bottom_comments_label.setText("La repuesta es " + str(true_answer_variable) + ".")
 
     if wrong_answer:
         random_text = randint(1, 10)
 
         if random_text == 1:
-            nothing2.setText("¡Qué lástima!")
+            top_comments_label.setText("¡Qué lástima!")
 
         elif random_text == 2:
-            nothing2.setText("¡Tendrás suerte la próxima vez!")
+            top_comments_label.setText("¡Tendrás suerte la próxima vez!")
 
         elif random_text == 3:
-            nothing2.setText("¡Incorrecto! ¡Inténtalo de nuevo!")
+            top_comments_label.setText("¡Incorrecto! ¡Inténtalo de nuevo!")
 
         elif random_text == 4:
-            nothing2.setText("¡No presiones al azar por favor...")
+            top_comments_label.setText("¡No presiones al azar por favor...")
 
         elif random_text == 5:
-            nothing2.setText("¡Vaya! Eso no fue lo que esperaba.")
+            top_comments_label.setText("¡Vaya! Eso no fue lo que esperaba.")
 
         elif random_text == 6:
-            nothing2.setText("¡Ups! Parece que eso no fue lo correcto.")
+            top_comments_label.setText("¡Ups! Parece que eso no fue lo correcto.")
 
         elif random_text == 7:
-            nothing2.setText("¡Sigue intentando!")
+            top_comments_label.setText("¡Sigue intentando!")
 
         elif random_text == 8:
-            nothing2.setText("¡Casi lo tienes!")
+            top_comments_label.setText("¡Casi lo tienes!")
 
         elif random_text == 9:
-            nothing2.setText("¡Eso estuvo cerca!")
+            top_comments_label.setText("¡Eso estuvo cerca!")
 
         else:
-            nothing2.setText("¡Ánimo! ¡La próxima vez será mejor!")
+            top_comments_label.setText("¡Ánimo! ¡La próxima vez será mejor!")
 
-    line.clear()
+    else:
+        random_answer = randint(1, 1000)
+        if random_answer == 1:
+            top_comments_label.setText("Tienes una oportunidad entre mil \n    de obtener este comentario")
+
+        elif random_answer < 250:
+            top_comments_label.setText("¡Genial!")
+
+        elif random_answer < 500:
+            top_comments_label.setText("¡Sigue así!")
+
+        elif random_answer < 750:
+            top_comments_label.setText("No está mal.")
+
+        else:
+            top_comments_label.setText("Mejor que mal :)")
+
+    answer_line.clear()
     note_calculating()
 
 def ok_button_clicked():
@@ -327,10 +448,10 @@ def ok_button_clicked():
         click.play()
         stats.show()
         ok_button.hide()
+        top_comments_label.hide()
         nothing2.hide()
-        nothing3.hide()
         if exercice > 7 and not test:
-            line.show()
+            answer_line.show()
             send_answer_button.show()
 
         if not test:
@@ -338,48 +459,48 @@ def ok_button_clicked():
                 questions += 1
 
             if exercice == 1:
-                ex1()
+                exercice1()
 
             elif exercice == 2:
-                ex2()
+                exercice2()
 
             elif exercice == 3:
-                ex3()
+                exercice3()
 
             elif exercice == 4:
-                ex4()
+                exercice4()
 
             elif exercice == 5:
-                ex5()
+                exercice5()
 
             elif exercice == 6:
-                ex6()
+                exercice6()
 
             elif exercice == 7:
-                ex7()
-            
+                exercice7()
+
             elif exercice == 8:
-                ex8()
-                
+                exercice8()
+
             elif exercice == 9:
-                ex9()
-                
+                exercice9()
+
             elif exercice == 10:
-                ex10()
-                
+                exercice10()
+
             elif exercice == 11:
-                ex11()
+                exercice11()
 
         else:
             test_questions += 1
             if test_questions == 10:
                 test = False
                 questions = 0
-                nothing2.hide()
-                true_answer.hide()
-                line.hide()
+                top_comments_label.hide()
+                bottom_comments_label.hide()
+                answer_line.hide()
                 quit_button.hide()
-                nothing3.hide()
+                nothing2.hide()
                 stats.hide()
                 nothing1.hide()
                 ok_button.show()
@@ -388,30 +509,32 @@ def ok_button_clicked():
                 print("La nota de esta evaluación es " + str(test_note))
 
             else:
-                ex12()
-    
+                test_exercice()
+
 def finish_exercice():
-    global exercice, test_questions, questions, lessons_mode
+    global exercice, test_questions, questions, menu_mode
     questions = 0
     test_questions = 0
     click.play()
-    exercice = 0
-    el_rio_fluye.stop()
+    menu_music.play(-1)
+    exercice_music.stop()
     lesson_music.stop()
     test_music.stop()
-    menu_music.play(-1)
+    exercice = 0
+
 
     ans_button1.hide()
     ans_button2.hide()
     ans_button3.hide()
     ans_button4.hide()
-    nothing2.hide()
-    true_answer.hide()
-    line.hide()
+    top_comments_label.hide()
+    bottom_comments_label.hide()
+    answer_line.hide()
     quit_button.hide()
-    nothing3.hide()
+    nothing2.hide()
     ok_button.hide()
     send_answer_button.hide()
+    next_button.hide()
 
     button01.show()
     button02.show()
@@ -424,14 +547,14 @@ def finish_exercice():
     button09.show()
     button10.show()
     button11.show()
-    if lessons_mode:
+    if menu_mode:
         button12.show()
-        nothing4.hide()
+        change_of_language_button.hide()
     else:
         button12.hide()
-        nothing4.show()
+        change_of_language_button.show()
 
-    lessons_button.show()
+    menu_mode_button.show()
     stats.show()
 
     top_of_screen.setText("Niveles de Español")
@@ -443,13 +566,13 @@ def four_answers_mode(question, ans1, ans2, ans3, ans4):
     global shuffle, right_ans_button, true_answer_variable, questions, test
     if not test and questions == 0:
         enter_sound.play()
-        el_rio_fluye.play(-1)
+        exercice_music.play(-1)
     true_answer_variable = ans4
     top_of_screen.setText(question)
     order_of_answers = [1, 2, 3, 4]
     shuffle(order_of_answers)
     right_ans_button = None
-    lessons_button.hide()
+    menu_mode_button.hide()
 
     menu_music.stop()
     button01.hide()
@@ -470,8 +593,8 @@ def four_answers_mode(question, ans1, ans2, ans3, ans4):
     ans_button3.show()
     ans_button4.show()
 
-    true_answer.setText("     Tienes que encontrar la forma correcta de \n conjugación y presionar uno de estos botones.")
-    true_answer.show()
+    bottom_comments_label.setText("     Tienes que encontrar la forma correcta de \n conjugación y presionar uno de estos botones.")
+    bottom_comments_label.show()
 
     if not test:
         quit_button.show()
@@ -486,7 +609,7 @@ def four_answers_mode(question, ans1, ans2, ans3, ans4):
     elif order_of_answers[0] == 2:
         ans_button1.setText(ans2)
     elif order_of_answers[0] == 3:
-        ans_button1.setText(ans3)        
+        ans_button1.setText(ans3)
     elif order_of_answers[0] == 4:
         ans_button1.setText(ans4)
         right_ans_button = 1
@@ -496,7 +619,7 @@ def four_answers_mode(question, ans1, ans2, ans3, ans4):
     elif order_of_answers[1] == 2:
         ans_button2.setText(ans2)
     elif order_of_answers[1] == 3:
-        ans_button2.setText(ans3)       
+        ans_button2.setText(ans3)
     elif order_of_answers[1] == 4:
         ans_button2.setText(ans4)
         right_ans_button = 2
@@ -506,7 +629,7 @@ def four_answers_mode(question, ans1, ans2, ans3, ans4):
     elif order_of_answers[2] == 2:
         ans_button3.setText(ans2)
     elif order_of_answers[2] == 3:
-        ans_button3.setText(ans3)      
+        ans_button3.setText(ans3)
     elif order_of_answers[2] == 4:
         ans_button3.setText(ans4)
         right_ans_button = 3
@@ -516,7 +639,7 @@ def four_answers_mode(question, ans1, ans2, ans3, ans4):
     elif order_of_answers[3] == 2:
         ans_button4.setText(ans2)
     elif order_of_answers[3] == 3:
-        ans_button4.setText(ans3)        
+        ans_button4.setText(ans3)
     elif order_of_answers[3] == 4:
         ans_button4.setText(ans4)
         right_ans_button = 4
@@ -525,11 +648,11 @@ def typing_answer_mode(question, true_ans):
     global exercice, true_answer_variable, questions, test
     if not test and questions == 0:
         enter_sound.play()
-        el_rio_fluye.play(-1)
+        exercice_music.play(-1)
 
     send_answer_button.show()
-    nothing2.hide()
-    lessons_button.hide()
+    top_comments_label.hide()
+    menu_mode_button.hide()
     menu_music.stop()
     button01.hide()
     button02.hide()
@@ -544,8 +667,8 @@ def typing_answer_mode(question, true_ans):
     button11.hide()
     button12.hide()
 
-    true_answer.setText("Si no tienes un taclado español:  ú  á  ó  é  í  ñ")
-    true_answer.show()
+    bottom_comments_label.setText("Si no tienes un taclado español:  ú  á  ó  é  í  ñ")
+    bottom_comments_label.show()
 
     if not test:
         quit_button.show()
@@ -561,17 +684,17 @@ def typing_answer_mode(question, true_ans):
     else:
         top_of_screen.setText('¿Cómo se dice "' + question + '" en español?')
 
-    line.show()
+    answer_line.show()
     send_answer_button.show()
 
 def two_answers_mode(question, right_answer):
     global right_ans_button, true_answer_variable, questions, test
     if not test and questions == 0:
         enter_sound.play()
-        el_rio_fluye.play(-1)
+        exercice_music.play(-1)
 
-    lessons_button.hide()
-    nothing2.hide()
+    menu_mode_button.hide()
+    top_comments_label.hide()
     menu_music.stop()
     button01.hide()
     button02.hide()
@@ -586,9 +709,12 @@ def two_answers_mode(question, right_answer):
     button11.hide()
     button12.hide()
 
-    true_answer.setText("Tienes que encuentre el verbo correcto \n     y presione uno de estos botones.")
-    true_answer.show()
-    
+    bottom_comments_label.setText("")
+    bottom_comments_label.show()
+
+    top_comments_label.setText("Tienes que encuentre el verbo correcto \n     y presione uno de estos botones.")
+    top_comments_label.show()
+
     if not test:
         quit_button.show()
         nothing1.hide()
@@ -608,7 +734,7 @@ def two_answers_mode(question, right_answer):
 
 # Exercices
 
-def ex1():
+def exercice1():
     global exercice
     exercice = 1
     random_question = randint(1, 6)
@@ -657,7 +783,7 @@ def ex1():
 
         elif random_question == 6:
             four_answers_mode("Comer con ella.", "como", "comer", "comemos", "come")
-            
+
         elif random_question == 7:
             four_answers_mode("Vivir con Juan.", "vivo", "vivi", "vivimos", "vive")
 
@@ -672,7 +798,7 @@ def ex1():
 
         elif random_question == 11:
             four_answers_mode("Hablar con Carla.", "hablo", "hablar", "hablamos", "habla")
-            
+
         elif random_question == 12:
             four_answers_mode("Comer con Carla.", "como", "comer", "comemos", "come")
 
@@ -687,7 +813,7 @@ def ex1():
 
     elif random_question == 4:
         random_question = randint(1,6)
-    
+
         if random_question == 1:
             four_answers_mode("Vivir con nosotros.", "vivo", "vivir", "vives", "vivimos")
 
@@ -743,8 +869,8 @@ def ex1():
             four_answers_mode("Vivir con ellas.", "vivo", "vivimos", "vives", "viven")
 
         elif random_question == 5:
-            four_answers_mode("Hablar con ellas.", "hablo", "hablamos", "hablas", "hablan")        
-            
+            four_answers_mode("Hablar con ellas.", "hablo", "hablamos", "hablas", "hablan")
+
         elif random_question == 6:
             four_answers_mode("Comer con ellas.", "como", "comemos", "comes", "comen")
 
@@ -761,12 +887,12 @@ def ex1():
             four_answers_mode("Vivir con ustedes.", "vivo", "vivimos", "vives", "viven")
 
         elif random_question == 11:
-            four_answers_mode("Hablar con ustedes.", "hablo", "hablamos", "hablas", "hablan")        
-            
+            four_answers_mode("Hablar con ustedes.", "hablo", "hablamos", "hablas", "hablan")
+
         elif random_question == 12:
             four_answers_mode("Comer con ustedes.", "como", "comemos", "comes", "comen")
 
-def ex2():
+def exercice2():
     global exercice
     exercice = 2
     random_question = randint(1, 6)
@@ -815,7 +941,7 @@ def ex2():
 
         elif random_question == 6:
             four_answers_mode("Ir con ella.", "voy", "ir", "vamos", "va")
-            
+
         elif random_question == 7:
             four_answers_mode("Tener con Juan.", "tengo", "tener", "tenemos", "tiene")
 
@@ -830,7 +956,7 @@ def ex2():
 
         elif random_question == 11:
             four_answers_mode("Ser con Carla.", "soy", "ser", "somos", "es")
-            
+
         elif random_question == 12:
             four_answers_mode("Ir con Carla.", "voy", "ir", "vamos", "va")
 
@@ -845,7 +971,7 @@ def ex2():
 
     elif random_question == 4:
         random_question = randint(1,6)
-    
+
         if random_question == 1:
             four_answers_mode("Tener con nosotros.", "tengo", "tener", "tienes", "tenemos")
 
@@ -901,8 +1027,8 @@ def ex2():
             four_answers_mode("Tener con ellas.", "tengo", "tener", "tienes", "tienen")
 
         elif random_question == 5:
-            four_answers_mode("Ser con ellas.", "soy", "ser", "eres", "son")        
-            
+            four_answers_mode("Ser con ellas.", "soy", "ser", "eres", "son")
+
         elif random_question == 6:
             four_answers_mode("Ir con ellas.", "voy", "ir", "vas", "van")
 
@@ -919,12 +1045,12 @@ def ex2():
             four_answers_mode("Tener con ustedes.", "tengo", "tener", "tienes", "tienen")
 
         elif random_question == 11:
-            four_answers_mode("Ser con ustedes.", "soy", "ser", "eres", "son")        
-            
+            four_answers_mode("Ser con ustedes.", "soy", "ser", "eres", "son")
+
         elif random_question == 12:
             four_answers_mode("Ir con ustedes.", "voy", "ir", "vas", "van")
- 
-def ex3():
+
+def exercice3():
     global exercice
     exercice = 3
     random_question = randint(1, 6)
@@ -973,7 +1099,7 @@ def ex3():
 
         elif random_question == 6:
             four_answers_mode("Levantarse con ella.", "te levantas", "nos levantamos", "me levantamo", "se levanta")
-            
+
         elif random_question == 7:
             four_answers_mode("Dormirse con Juan.", "te duermes", "nos dormemos", "me duermo", "se duerme")
 
@@ -988,7 +1114,7 @@ def ex3():
 
         elif random_question == 11:
             four_answers_mode("Llamarse con Carla.", "te llamas", "nos llamamos", "me llamo", "se llama")
-            
+
         elif random_question == 12:
             four_answers_mode("Levantarse con Carla.", "te levantas", "nos levantamos", "me levantamo", "se levanta")
 
@@ -1003,7 +1129,7 @@ def ex3():
 
     elif random_question == 4:
         random_question = randint(1,6)
-    
+
         if random_question == 1:
             four_answers_mode("Dormirse con nosotros.", "te duermes", "se duerme", "me duermo", "nos dormemos")
 
@@ -1059,8 +1185,8 @@ def ex3():
             four_answers_mode("Dormirse con ellas.", "te duermes", "se duerme", "nos dormemos", "se duermen")
 
         elif random_question == 5:
-            four_answers_mode("Llamarse con ellas.", "te llamas", "se llama", "nos llamamos", "se llaman")        
-            
+            four_answers_mode("Llamarse con ellas.", "te llamas", "se llama", "nos llamamos", "se llaman")
+
         elif random_question == 6:
             four_answers_mode("Levantarse con ellas.", "te levantas", "se levanta", "nos levantamos", "se levantaman")
 
@@ -1077,12 +1203,12 @@ def ex3():
             four_answers_mode("Dormirse con ustedes.", "te duermes", "se duerme", "nos dormemos", "se duermen")
 
         elif random_question == 11:
-            four_answers_mode("Llamarse con ustedes.", "te llamas", "se llama", "nos llamamos", "se llaman")        
-            
+            four_answers_mode("Llamarse con ustedes.", "te llamas", "se llama", "nos llamamos", "se llaman")
+
         elif random_question == 12:
             four_answers_mode("Levantarse con ustedes.", "te levantas", "se levanta", "nos levantamos", "se levantaman")
- 
-def ex4():
+
+def exercice4():
     global exercice
     exercice = 4
     random_question = randint(1, 6)
@@ -1131,7 +1257,7 @@ def ex4():
 
         elif random_question == 6:
             four_answers_mode("Jugar con ella.", "jugo", "jugoy", "juego", "juega")
-            
+
         elif random_question == 7:
             four_answers_mode("Poder con usted.", "podo", "podoy", "puedo", "puede")
 
@@ -1146,7 +1272,7 @@ def ex4():
 
         elif random_question == 11:
             four_answers_mode("Pensar con Carla.", "penso", "pensoy", "pienso", "piensa")
-            
+
         elif random_question == 12:
             four_answers_mode("Jugar con Carla.", "jugo", "jugoy", "juego", "juega")
 
@@ -1161,7 +1287,7 @@ def ex4():
 
     elif random_question == 4:
         random_question = randint(1,6)
-    
+
         if random_question == 1:
             four_answers_mode("Poder con nosotros.", "puedemos", "puedéis", "podéis", "podemos")
 
@@ -1217,8 +1343,8 @@ def ex4():
             four_answers_mode("Poder con ellas.", "puedemos", "podemos", "poden", "pueden")
 
         elif random_question == 5:
-            four_answers_mode("Pensar con ellas.", "piensamos", "pensamos", "pensan", "piensan")        
-            
+            four_answers_mode("Pensar con ellas.", "piensamos", "pensamos", "pensan", "piensan")
+
         elif random_question == 6:
             four_answers_mode("Jugar con ellas.", "juegamos", "jugamos", "jugan", "juegan")
 
@@ -1235,12 +1361,12 @@ def ex4():
             four_answers_mode("Poder con Carla y Juan.", "puedemos", "podemos", "poden", "pueden")
 
         elif random_question == 11:
-            four_answers_mode("Pensar con Carla y Juan.", "piensamos", "pensamos", "pensan", "piensan")        
-            
+            four_answers_mode("Pensar con Carla y Juan.", "piensamos", "pensamos", "pensan", "piensan")
+
         elif random_question == 12:
             four_answers_mode("Jugar con Carla y Juan.", "juegamos", "jugamos", "jugan", "juegan")
- 
-def ex5():
+
+def exercice5():
     global exercice
     exercice = 5
     random_question = randint(1, 6)
@@ -1289,7 +1415,7 @@ def ex5():
 
         elif random_question == 6:
             four_answers_mode("Pedir con ella.", "pedo", "pido", "pede", "pide")
-            
+
         elif random_question == 7:
             four_answers_mode("Medir con Carla.", "medo", "mido", "mede", "mide")
 
@@ -1304,7 +1430,7 @@ def ex5():
 
         elif random_question == 11:
             four_answers_mode("Vestir con Juan.", "vesto", "visto", "veste", "viste")
-            
+
         elif random_question == 12:
             four_answers_mode("Pedir con Juan.", "pedo", "pido", "pede", "pide")
 
@@ -1319,7 +1445,7 @@ def ex5():
 
     elif random_question == 4:
         random_question = randint(1,6)
-    
+
         if random_question == 1:
             four_answers_mode("Medir con nosotros.", "medís", "midemos", "midéis", "medimos")
 
@@ -1375,8 +1501,8 @@ def ex5():
             four_answers_mode("Medir con ellas.", "midemos", "medimos", "medin", "miden")
 
         elif random_question == 5:
-            four_answers_mode("Vestir con ellas.", "vistemos", "vestimos", "vestin", "visten")        
-            
+            four_answers_mode("Vestir con ellas.", "vistemos", "vestimos", "vestin", "visten")
+
         elif random_question == 6:
             four_answers_mode("Pedir con ellas.", "pidemos", "pedimos", "pedin", "piden")
 
@@ -1393,12 +1519,12 @@ def ex5():
             four_answers_mode("Medir con ustedes.", "midemos", "medimos", "medin", "miden")
 
         elif random_question == 11:
-            four_answers_mode("Vestir con ustedes.", "vistemos", "vestimos", "vestin", "visten")        
-            
+            four_answers_mode("Vestir con ustedes.", "vistemos", "vestimos", "vestin", "visten")
+
         elif random_question == 12:
             four_answers_mode("Pedir con ustedes.", "pidemos", "pedimos", "pedin", "piden")
- 
-def ex6():
+
+def exercice6():
     global exercice
     exercice = 6
     random_question = randint(1, 2)
@@ -1423,7 +1549,7 @@ def ex6():
 
         elif random_question == 6:
             four_answers_mode("Comer con ella en imperatovo.", "como", "comer", "comemos", "come")
-            
+
         elif random_question == 7:
             four_answers_mode("Vivir con Juan en imperatovo.", "vivo", "vivi", "vivimos", "vive")
 
@@ -1438,7 +1564,7 @@ def ex6():
 
         elif random_question == 11:
             four_answers_mode("Hablar con Carla en imperatovo.", "hablo", "hablar", "hablamos", "habla")
-            
+
         elif random_question == 12:
             four_answers_mode("Comer con Carla en imperatovo.", "como", "comer", "comemos", "come")
 
@@ -1472,7 +1598,7 @@ def ex6():
         else:
             four_answers_mode("Comer con vosotras en imperatovo.", "como", "comer", "coméis", "comed")
 
-def ex7():
+def exercice7():
     global exercice
     exercice = 7
     random_question = randint(1, 20)
@@ -1502,7 +1628,7 @@ def ex7():
         two_answers_mode("Nosotros ... en casa.", 2)
 
     elif random_question == 9:
-        two_answers_mode("Pedro ... profesor.", 2)
+        two_answers_mode("Tú ... muy mal.", 2)
 
     elif random_question == 10:
         two_answers_mode("María ... enferma hoy.", 2)
@@ -1537,11 +1663,11 @@ def ex7():
 
     elif random_question == 20:
         two_answers_mode("... las 3 de la tarde. ", 1)
- 
-def ex8():
+
+def exercice8():
     global exercice
     exercice = 8
-    random_question = randint(1, 39)
+    random_question = randint(1, 40)
 
     if random_question == 1:
         typing_answer_mode("1", "uno")
@@ -1657,55 +1783,58 @@ def ex8():
     elif random_question == 38:
         typing_answer_mode("1 000", "mil")
 
+    elif random_question == 39:
+        typing_answer_mode("0", "zero")
+
     else:
         typing_answer_mode("1 000 000", "millión")
 
     if questions == 0:
         enter_sound.play()
-        el_rio_fluye.play(-1)
+        exercice_music.play(-1)
 
-def ex9():
+def exercice9():
     global exercice
     exercice = 9
     random_question = randint(1, 12)
 
     if random_question == 1:
-        typing_answer_mode("Perou", "perú")
+        typing_answer_mode("Перу", "perú")
 
     elif random_question == 2:
-        typing_answer_mode("Chili", "chile")
+        typing_answer_mode("Чілі", "chile")
 
     elif random_question == 3:
-        typing_answer_mode("Etats Unis d'Amérique", "estados unidos")
+        typing_answer_mode("Сполучені Штати Америки", "estados unidos")
 
     elif random_question == 4:
-        typing_answer_mode("Canada", "canadá")
+        typing_answer_mode("Канада", "canadá")
 
     elif random_question == 5:
-        typing_answer_mode("Maroque", "marruecos")
+        typing_answer_mode("Марокко", "marruecos")
 
     elif random_question == 6:
-        typing_answer_mode("Algérie", "argelia")
+        typing_answer_mode("Алжерія", "argelia")
 
     elif random_question == 7:
-        typing_answer_mode("Australie", "australia")
+        typing_answer_mode("Австралія", "australia")
 
     elif random_question == 8:
-        typing_answer_mode("Nouvelle Zélande", "nueva zelanda")
+        typing_answer_mode("Нова зеландія", "nueva zelanda")
 
     elif random_question == 9:
-        typing_answer_mode("Espagne", "españa")
+        typing_answer_mode("Іспанія", "españa")
 
     elif random_question == 10:
-        typing_answer_mode("France", "francia")
+        typing_answer_mode("Франція", "francia")
 
     elif random_question == 11:
-        typing_answer_mode("Chine", "china")
+        typing_answer_mode("Китай", "china")
 
     else:
-        typing_answer_mode("Inde", "india")
+        typing_answer_mode("Індія", "india")
 
-def ex10():
+def exercice10():
     global exercice
     exercice = 10
     random_question = randint(1, 9)
@@ -1737,81 +1866,150 @@ def ex10():
     else:
         typing_answer_mode("el nuez", "los nueces")
 
-def ex11():
+def exercice11():
     global exercice
     exercice = 11
     random_question = randint(1, 23)
+    if language == 1:
+        if random_question == 1:
+            typing_answer_mode("понеділок", "lunes")
 
-    if random_question == 1:
-        typing_answer_mode("lundi", "lunes")
+        elif random_question == 2:
+            typing_answer_mode("вівторок", "martes")
 
-    elif random_question == 2:
-        typing_answer_mode("mardi", "martes")
+        elif random_question == 3:
+            typing_answer_mode("середа", "miécroles")
 
-    elif random_question == 3:
-        typing_answer_mode("mercredi", "miécroles")
+        elif random_question == 4:
+            typing_answer_mode("четвер", "jueves")
 
-    elif random_question == 4:
-        typing_answer_mode("jeudi", "jueves")
+        elif random_question == 5:
+            typing_answer_mode("п'ятниця", "viernes")
 
-    elif random_question == 5:
-        typing_answer_mode("vendredi", "viernes")
+        elif random_question == 6:
+            typing_answer_mode("субота", "sábado")
 
-    elif random_question == 6:
-        typing_answer_mode("samedi", "sábado")
+        elif random_question == 7:
+            typing_answer_mode("неділя", "domingo")
 
-    elif random_question == 7:
-        typing_answer_mode("dimanche", "domingo")
+        elif random_question == 8:
+            typing_answer_mode("Січень", "enero")
 
-    elif random_question == 8:
-        typing_answer_mode("janvier", "enero")
+        elif random_question == 9:
+            typing_answer_mode("лютий", "febrero")
 
-    elif random_question == 9:
-        typing_answer_mode("février", "febrero")
+        elif random_question == 10:
+            typing_answer_mode("березень", "marzo")
 
-    elif random_question == 10:
-        typing_answer_mode("mars", "marzo")
+        elif random_question == 11:
+            typing_answer_mode("квітень", "abril")
 
-    elif random_question == 11:
-        typing_answer_mode("avril", "abril")
+        elif random_question == 12:
+            typing_answer_mode("травень", "mayo")
 
-    elif random_question == 12:
-        typing_answer_mode("mai", "mayo")
+        elif random_question == 13:
+            typing_answer_mode("червень", "junio")
 
-    elif random_question == 13:
-        typing_answer_mode("juin", "junio")
+        elif random_question == 14:
+            typing_answer_mode("липень", "julio")
 
-    elif random_question == 14:
-        typing_answer_mode("juillet", "julio")
+        elif random_question == 15:
+            typing_answer_mode("серпень", "agosto")
 
-    elif random_question == 15:
-        typing_answer_mode("août", "agosto")
+        elif random_question == 16:
+            typing_answer_mode("вересень", "septiembre")
 
-    elif random_question == 16:
-        typing_answer_mode("septembre", "septiembre")
+        elif random_question == 17:
+            typing_answer_mode("жовтень", "octubre")
 
-    elif random_question == 17:
-        typing_answer_mode("octobre", "octubre")
+        elif random_question == 18:
+            typing_answer_mode("листопад", "noviemvre")
 
-    elif random_question == 18:
-        typing_answer_mode("novembre", "noviemvre")
+        elif random_question == 19:
+            typing_answer_mode("грудень", "diciembre")
 
-    elif random_question == 19:
-        typing_answer_mode("décembre", "diciembre")
+        elif random_question == 20:
+            typing_answer_mode("весна", "la primavera")
 
-    elif random_question == 20:
-        typing_answer_mode("le printemps", "la primavera")
+        elif random_question == 21:
+            typing_answer_mode("літо", "el verano")
 
-    elif random_question == 21:
-        typing_answer_mode("l'été", "el verano")
+        elif random_question == 22:
+            typing_answer_mode("осінь", "el otoño")
 
-    elif random_question == 22:
-        typing_answer_mode("l'automne", "el otoño")
+        else:
+            typing_answer_mode("зима", "el invierno")
+    elif language == 1:
+        if random_question == 1:
+            typing_answer_mode("lundi", "lunes")
 
-    else:
-        typing_answer_mode("l'hiver", "el inverno")
+        elif random_question == 2:
+            typing_answer_mode("mardi", "martes")
 
-def ex12(): # the test
+        elif random_question == 3:
+            typing_answer_mode("mercredi", "miécroles")
+
+        elif random_question == 4:
+            typing_answer_mode("jeudi", "jueves")
+
+        elif random_question == 5:
+            typing_answer_mode("vendredi", "viernes")
+
+        elif random_question == 6:
+            typing_answer_mode("samedi", "sábado")
+
+        elif random_question == 7:
+            typing_answer_mode("dimanche", "domingo")
+
+        elif random_question == 8:
+            typing_answer_mode("janvier", "enero")
+
+        elif random_question == 9:
+            typing_answer_mode("février", "febrero")
+
+        elif random_question == 10:
+            typing_answer_mode("mars", "marzo")
+
+        elif random_question == 11:
+            typing_answer_mode("avril", "abril")
+
+        elif random_question == 12:
+            typing_answer_mode("mai", "mayo")
+
+        elif random_question == 13:
+            typing_answer_mode("juin", "junio")
+
+        elif random_question == 14:
+            typing_answer_mode("juillet", "julio")
+
+        elif random_question == 15:
+            typing_answer_mode("août", "agosto")
+
+        elif random_question == 16:
+            typing_answer_mode("septembre", "septiembre")
+
+        elif random_question == 17:
+            typing_answer_mode("octobre", "octubre")
+
+        elif random_question == 18:
+            typing_answer_mode("novembre", "noviemvre")
+
+        elif random_question == 19:
+            typing_answer_mode("décembre", "diciembre")
+
+        elif random_question == 20:
+            typing_answer_mode("le printemps", "la primavera")
+
+        elif random_question == 21:
+            typing_answer_mode("l'été", "el verano")
+
+        elif random_question == 22:
+            typing_answer_mode("l'automne", "el otoño")
+
+        else:
+            typing_answer_mode("l'hiver", "el invierno")
+
+def test_exercice():
     global test, test_questions, test_note, test_finished, exercice
     exercice = 1
     test_finished = False
@@ -1826,136 +2024,223 @@ def ex12(): # the test
         test_music.play(-1)
 
     if random_exercice == 1:
-        ex1()
+        exercice1()
 
     elif random_exercice == 2:
-        ex2()
+        exercice2()
 
     elif random_exercice == 3:
-        ex3()
+        exercice3()
 
     elif random_exercice == 4:
-        ex4()
+        exercice4()
 
     elif random_exercice == 5:
-        ex5()
+        exercice5()
 
     elif random_exercice == 6:
-        ex6()
+        exercice6()
 
     elif random_exercice == 7:
-        ex7()
+        exercice7()
 
     elif random_exercice == 8:
-        ex8()
+        exercice8()
 
     elif random_exercice == 9:
-        ex9()
+        exercice9()
 
     elif random_exercice == 10:
-        ex10()
+        exercice10()
 
     else:
-        ex11()
+        exercice11()
 
 
-# When menu buttons were clicked
+# When menu buttons were clicked (+ lessons)
 
 def menu_button1():
-    global lessons_mode
-    if lessons_mode:
-        ex1()
+    global menu_mode, language
+    if menu_mode:
+        exercice1()
     else:
-        lesson()
+        if language == 1:
+            open_a_lesson(  "      AR \n \n BV + o \n BV + as \n BV + a \n BV + amos \n BV + áis \n BV + an ",
+                            "      ER \n \n BV + o \n BV + es \n BV + e \n BV + emos \n BV + éis \n BV + en ",
+                            "      IR \n \n BV + o \n BV + es \n BV + e \n BV + imos \n BV + ís  \n BV + en ",
+                            " 1ère pers. du sing.: Yo \n 2ème pers. du sing.: Tú \n 3ème pers. du sing.: Él/Ella/Usted/Nom \n \n 1ère pers. du plur.: Nosotr@` \n 2ème pers. du plur.: Vosotr@s \n 3ème pers. du plur.: Ell@s/Ustedes/Noms coordonnés",
+                            " VIVIR = vivre \n HABLAR = parler \n COMER = manger")
+        elif language == 2:
+            open_a_lesson(  "      AR \n \n BV + o \n BV + as \n BV + a \n BV + amos \n BV + áis \n BV + an ",
+                            "      ER \n \n BV + o \n BV + es \n BV + e \n BV + emos \n BV + éis \n BV + en ",
+                            "      IR \n \n BV + o \n BV + es \n BV + e \n BV + imos \n BV + ís  \n BV + en ",
+                            " Перша особа однини: Yo \n Друга особа однини.: Tú \n Третя особа однини: Él/Ella/Usted/Прийменник \n \n Перша особа множини: Nosotr@` \n Друга особа множини: Vosotr@s \n Друга особа множини Ell@s/Ustedes/Прийменники",
+                            " VIVIR = жити \n HABLAR = говорити \n COMER = їсти")
 
 def menu_button2():
-    global lessons_mode
-    if lessons_mode:
-        ex2()
+    global menu_mode, language
+    if menu_mode:
+        exercice2()
     else:
-        lesson()
+        if language == 1:
+            open_a_lesson(  " TENER \n \n Tengo \n Tienes \n Tiene \n Tenemos \n Teneis \n Tienen",
+                            "  SER  \n \n Soy \n Eres \n Es \n Somos \n Sois \n Son",
+                            "   IR  \n \n Voy \n Vas \n Va \n Vamos \n Vais \n Van",
+                            " ESTAR \n \n Estoy \n Estás \n Está \n Estámos \n Estáis \n Están",
+                            "    On ne peut pas deviner qu'un verbe est irrégulié, \n mais on peut l'apprendre. \n Aprrends donc pien tes verbes irréguliés :) \n TENER = avoir / posseder \n SER // ESTAR = être (voir la différence dans le cour №7) \n IR = aller")
+        elif language == 2:
+            open_a_lesson(  " TENER \n \n Tengo \n Tienes \n Tiene \n Tenemos \n Teneis \n Tienen",
+                            "  SER  \n \n Soy \n Eres \n Es \n Somos \n Sois \n Son",
+                            "   IR  \n \n Voy \n Vas \n Va \n Vamos \n Vais \n Van",
+                            " ESTAR \n \n Estoy \n Estás \n Está \n Estámos \n Estáis \n Están",
+                            "    Неможна здогадатися, що дієслово неправильне, \n але це можна вивщити. Тож вивчай неправильні \n дієслова напам'ять :) \n TENER = мати / володіти \n SER // ESTAR = бути (дивитися на різницю в уроці №7) \n IR = йти / їхати / переміщатися")
 
-def menu_button3():
-    global lessons_mode
-    if lessons_mode:
-        ex3()
+def menu_button3(): #TODO: translate
+    global menu_mode, language
+    if menu_mode:
+        exercice3()
     else:
-        lesson()
+        if language == 1:
+            open_a_lesson(  "    Avec les verbes pronominaux tout est relativement simple: \n la particule de 'pronominalisation' SE se colle derrière \n à l'infinitif, donc il est très simple de voir qu'un verbe est \n pronominal. Puis, en conjuguant le verbe on la met devant, \n en la changeant. Voici les formes de cette particule:",
+                            "         V + SE \n ME + V Conjugué \n TE + V Conjugué \n SE + V Conjugué \n NOS + V Conjugué \n OS + V Conjugué \n SE + V Conjugué",
+                            " DORMIRSE = s'endormir \n LLEVANTARSE = se lever \n LLAMARSE = s'appeller")
+        elif language == 2:
+            open_a_lesson(  "    Avec les verbes pronominaux tout est relativement simple: \n la particule de 'pronominalisation' SE se colle derrière \n à l'infinitif, donc il est très simple de voir qu'un verbe est \n pronominal. Puis, en conjuguant le verbe on la met devant, \n en la changeant. Voici les formes de cette particule:",
+                            "         V + SE \n ME + Спряжене Дієслово \n TE + Спряжене Дієслово \n SE + Спряжене Дієслово \n NOS + Спряжене Дієслово \n OS + Спряжене Дієслово \n SE + Спряжене Дієслово",
+                            " DORMIRSE = засипати \n LLEVANTARSE = вставати \n LLAMARSE = дзвонити / звати / кликати")
 
-def menu_button4():
-    global lessons_mode
-    if lessons_mode:
-        ex4()
+def menu_button4(): #TODO: translate
+    global menu_mode, language
+    if menu_mode:
+        exercice4()
     else:
-        lesson()
+        if language == 1:
+            open_a_lesson(  "    On ne peut pas reconnaître un verbe à diphtongue, \n mais on peut l'apprendre. \n Tout dépend de la lettre qui 'diphtongue': \n 1ère possibilité: O -> UE \n 2ème possibilité: I -> IE \n 3ème possibilité: E -> UE \n    Et souviens-toi que les verbes ne 'diphtonguent' pas \n a la 1aère et 2ème du pluriel :)",
+                            " dOrmir \n dUErmo \n dUErmes \n dUErme \n dOrmemos \n dOrmís \n dUErmen",
+                            " PODER = pouvoir \n PENSAR = penser \n JUGAR = jouer")
+        elif language == 2:
+            open_a_lesson(  "    On ne peut pas reconnaître un verbe à diphtongue, \n mais on peut l'apprendre. \n Tout dépend de la lettre qui 'diphtongue': \n 1ère possibilité: O -> UE \n 2ème possibilité: I -> IE \n 3ème possibilité: E -> UE \n    Et souviens-toi que les verbes ne 'diphtonguent' pas \n a la 1aère et 2ème du pluriel :)",
+                            " dOrmir \n dUErmo \n dUErmes \n dUErme \n dOrmemos \n dOrmís \n dUErmen",
+                            " PODER = pouvoir \n PENSAR = penser \n JUGAR = jouer")
 
-def menu_button5():
-    global lessons_mode
-    if lessons_mode:
-        ex5()
+def menu_button5(): #TODO: translate
+    global menu_mode, language
+    if menu_mode:
+        exercice5()
     else:
-        lesson()
+        if language == 1:
+            open_a_lesson(  "    Avec les verbes affaiblissement c'est pareil que avec \n ceux à diphtongue: on ne peut pas le reconnaître. Mais dès \n que l'on connaît que un verbe est affaiblissement il est \n très simple de le conjuguer: en echangeant le I et le E \n (sauf pour nous et vous, comme pour la diphtongue). \n Il est aussi important de noter que un verbe pronominal \n peut être à diphtongue (comme dormirse = s'endormir) ou \n affaiblissement (comme vestirse = se vêtir/s'habiller).",
+                            "EXEMPLE: \n   pEdIr \n   pIdO \n   pIdES \n   pIdE \n   pEdIMOS \n   pEdÍS \n   pIdEN",
+                            "MEDIR = mesurer \n VESTIR = vêtir/habiller \n PEDIR = demander")
+        elif language == 2:
+            open_a_lesson(  "    Avec les verbes affaiblissement c'est pareil que avec \n ceux à diphtongue: on ne peut pas le reconnaître. Mais dès \n que l'on connaît que un verbe est affaiblissement il est \n très simple de le conjuguer: en echangeant le I et le E \n (sauf pour nous et vous, comme pour la diphtongue). \n Il est aussi important de noter que un verbe pronominal \n peut être à diphtongue (comme dormirse = s'endormir) ou \n affaiblissement (comme vestirse = se vêtir/s'habiller).",
+                            "EXEMPLE: \n   pEdIr \n   pIdO \n   pIdES \n   pIdE \n   pEdIMOS \n   pEdÍS \n   pIdEN",
+                            "MEDIR = mesurer \n VESTIR = vêtir/habiller \n PEDIR = demander")
 
-def menu_button6():
-    global lessons_mode
-    if lessons_mode:
-        ex6()
+def menu_button6(): #TODO: translate
+    global menu_mode, language
+    if menu_mode:
+        exercice6()
     else:
-        lesson()
+        if language == 1:
+            open_a_lesson(  "    On étudie deux formes d'impératif: toi et vous. Pour la \n première il suffit de mettre le verbe à la 3ème du \n singulier. Pour la deuxième on utilise la formule \n V à'linfinitif - R + D. Voilà quelques exemples:",
+                            " BEBER (boire) -> bebe / bebed \n CAMINAR (marcher/cheminer) -> camina / caminad \n SALIR (sortir) -> sale / salid")
+        elif language == 2:
+            open_a_lesson(  "    On étudie deux formes d'impératif: toi et vous. Pour la \n première il suffit de mettre le verbe à la 3ème du \n singulier. Pour la deuxième on utilise la formule \n V à'linfinitif - R + D. Voilà quelques exemples:",
+                            " BEBER (boire) -> bebe / bebed \n CAMINAR (marcher/cheminer) -> camina / caminad \n SALIR (sortir) -> sale / salid")
 
-def menu_button7():
-    global lessons_mode
-    if lessons_mode:
-        ex7()
+def menu_button7(): #TODO: translate
+    global menu_mode, language
+    if menu_mode:
+        exercice7()
     else:
-        lesson()
+        if language == 1:
+            open_a_lesson(  "    On utilise SER pour décrire quelquechose qui ne change \n pas (ou rarement), comme une maladie chronique, une \n nationalité (et d'où on vient), un métier, mais aussi dire \n l'endroit où se trouve une capitale, un anniversaire, quelle \n heure il est, comment est la météo ou encore qui est \n mon (meilleur) ami.",
+                            "  Quant à ESTAR, on l'utilise pour décrire quelquechose qui \n change, comme une humeur ou un sentiment, l'état d'un \n lieu, là où quelquechose ou quelqun se trouve, etc...")
+        elif language == 2:
+            open_a_lesson(  "    On utilise SER pour décrire quelquechose qui ne change \n pas (ou rarement), comme une maladie chronique, une \n nationalité (et d'où on vient), un métier, mais aussi dire \n l'endroit où se trouve une capitale, un anniversaire, quelle \n heure il est, comment est la météo ou encore qui est \n mon (meilleur) ami.",
+                            "  Quant à ESTAR, on l'utilise pour décrire quelquechose qui \n change, comme une humeur ou un sentiment, l'état d'un \n lieu, là où quelquechose ou quelqun se trouve, etc...")
 
-def menu_button8():
-    global lessons_mode
-    if lessons_mode:
-        ex8()
+def menu_button8(): #TODO: translate
+    global menu_mode, language
+    if menu_mode:
+        exercice8()
     else:
-        lesson()
+        if language == 1:
+            open_a_lesson(  "    Il faudra aussi apprendre les chiffres: de 0 à 29 sont \n irréguliés. Puis, il suffira d'apprendre 30, 40, 50, etc... \n et rajouter 'y' puis le nombre d'unités, que tu auras appri. \n C'est pareil pour les centaines, les milliers, \n les millions, etc...",
+                            " 0 = zero \n 1 = uno \n 2 = dos \n 3 = tres \n 4 = quatro \n 5 = cinco \n 6 = seis \n 7 = siete \n 8 = ocho \n 9 = nueve",
+                            " 10 = diez \n 11 = once \n 12 = doce \n 13 = trece \n 14 = catorce \n 15 = quince \n 16 = dieciséis \n 17 = diecisiete \n 18 = dieciocho \n 19 = diecinueve",
+                            " 20 = veinte \n 21 = ventiuno \n 22 = ventidós \n 23 = ventitrés \n 24 = ventiquatro \n 25 = venticinco \n 26 = ventiséis \n 27 = ventisiete \n 28 = ventiocho \n 29 = ventinueve",
+                            " 30 = trienta \n 40 = cuatenta \n 50 = cincuenta \n 60 = sesenta \n 70 = setenta \n 80 = ochenta \n 90 = noventa \n 100 = cien \n 1 000 = mil \n 1 000 000 = millón")
+        elif language == 2:
+            open_a_lesson(  "    Il faudra aussi apprendre les chiffres: de 0 à 29 sont \n irréguliés. Puis, il suffira d'apprendre 30, 40, 50, etc... \n et rajouter 'y' puis le nombre d'unités, que tu auras appri. \n C'est pareil pour les centaines, les milliers, \n les millions, etc...",
+                            " 0 = zero \n 1 = uno \n 2 = dos \n 3 = tres \n 4 = quatro \n 5 = cinco \n 6 = seis \n 7 = siete \n 8 = ocho \n 9 = nueve",
+                            " 10 = diez \n 11 = once \n 12 = doce \n 13 = trece \n 14 = catorce \n 15 = quince \n 16 = dieciséis \n 17 = diecisiete \n 18 = dieciocho \n 19 = diecinueve",
+                            " 20 = veinte \n 21 = ventiuno \n 22 = ventidós \n 23 = ventitrés \n 24 = ventiquatro \n 25 = venticinco \n 26 = ventiséis \n 27 = ventisiete \n 28 = ventiocho \n 29 = ventinueve",
+                            " 30 = trienta \n 40 = cuatenta \n 50 = cincuenta \n 60 = sesenta \n 70 = setenta \n 80 = ochenta \n 90 = noventa \n 100 = cien \n 1 000 = mil \n 1 000 000 = millón")
 
 def menu_button9():
-    global lessons_mode
-    if lessons_mode:
-        ex9()
+    global menu_mode, language
+    if menu_mode:
+        exercice9()
     else:
-        lesson()
+        if language == 1:
+            open_a_lesson(  " Il te faudra aussi apprendre une douzaine de pays (deux \n par continent), pour la culture générale. Les voici :)",
+                            "    América del Sur = Amérique du Sud \n Perú = Pérou \n Chile = Chili \n \n    América del Norte = Amérique du Nord \n Estados Unidos = Etats Unis d'Amérique \n Canada = Canadá \n",
+                            "    África = Afrique \n Marruecos = Maroque \n Algeria = Algérie \n \n   Oceanía = Océanie \n Australia = Australie \n Nueva Zelanda = Nouvelle Zélande",
+                            "    Europa = Europe \n España = Espagne \n Francia = France \n \n    Asia = Asie \n China = Chine \n India = Inde")
+        elif language == 2:
+            open_a_lesson(  " Тобі також доведеться вивчити з десяток країн (дві на \n континент). Ось вони:",
+                            "    América del Sur = Південна Америка \n Perú = Перу \n Chile = Чілі \n \n    América del Norte = Північна Америка \n Estados Unidos = Сполучені Штати Америки \n Канада = Canadá \n",
+                            "    África = Африка \n Marruecos = Марокко \n Algeria = Алжерія \n \n   Oceanía = Океанія \n Australia = Австралія \n Nueva Zelanda = Нова Зеландія",
+                            "    Europa = Європа\n España = Іспанія \n Francia = Франція \n \n    Asia = Азія \n China = Китай \n India = Індія")
 
-def menu_button10():
-    global lessons_mode
-    if lessons_mode:
-        ex10()
+def menu_button10(): #TODO: translate
+    global menu_mode, language
+    if menu_mode:
+        exercice10()
     else:
-        lesson()
+        if language == 1:
+            open_a_lesson(  "    Il est très simple de mettre un mot au pluriel, si l'on \n connaît la règle. Premièrement, il faut le faire pour \n son article: 'la' devient 'las' et 'el' devient 'los'. \n Après avoir fait cela on passe au nom. S'il se termine \n par une voyelle, il suffit juste de mettre 's' à la fin de \n ce mot. S'il se termine par un 'z' on l'enlève on met \n 'ces' à la place. Et si ce mot se termine par toute autre \n consonne on lui colle 'es'. Il est aussi important de noter \n que 'un' et 'una' ne se mettent pas au pluriel, on n'écrit \n rien. Voilà quelques exemles:",
+                            "la abuela -> las abuelas \n el perro -> los perros \n la madre -> las madres \n \n la edad -> las edades \n el lugar -> los lugares \n el móvil -> los moviles \n \n el lápiz -> los lapices \n la nariz -> las narices \n la voz -> las voces")
+        elif language == 2:
+            open_a_lesson(  "    Il est très simple de mettre un mot au pluriel, si l'on \n connaît la règle. Premièrement, il faut le faire pour \n son article: 'la' devient 'las' et 'el' devient 'los'. \n Après avoir fait cela on passe au nom. S'il se termine \n par une voyelle, il suffit juste de mettre 's' à la fin de \n ce mot. S'il se termine par un 'z' on l'enlève on met \n 'ces' à la place. Et si ce mot se termine par toute autre \n consonne on lui colle 'es'. Il est aussi important de noter \n que 'un' et 'una' ne se mettent pas au pluriel, on n'écrit \n rien. Voilà quelques exemles:",
+                            "la abuela -> las abuelas \n el perro -> los perros \n la madre -> las madres \n \n la edad -> las edades \n el lugar -> los lugares \n el móvil -> los moviles \n \n el lápiz -> los lapices \n la nariz -> las narices \n la voz -> las voces")
 
 def menu_button11():
-    global lessons_mode
-    if lessons_mode:
-        ex11()
+    global menu_mode, language
+    if menu_mode:
+        exercice11()
     else:
-        lesson()
+        if language == 1:
+            open_a_lesson(  " Lunes = Lundi \n Martes = Mardi \n Miércoles = Mercredi \n Jueves = Jeudi \n Viernes = Vendredi \n Sábado = Samedi \n Domingo = Dimanche",
+                            " Enero = Janvier \n Febrero = Février \n Marzo = Mars \n Abril = Avril \n Mayo = Mai \n Junio = Juin",
+                            " Julio = Juillet \n Agosto = Août \n Septiembre = Septembre \n Octubre = Octobre \n Noviembre = Novembre \n Diciembre = Décembre",
+                            " El invierno = L'hiver \n La primavera = Le printemps \n El verano = L'été \n El otoño = L'automne")
+        elif language == 2:
+            open_a_lesson(  " Lunes = Понеділок \n Martes = Вівторок \n Miércoles = Середа \n Jueves = Четвер \n Viernes = П'ятниця \n Sábado = Субота \n Domingo = Неділя",
+                            " Enero = Січень \n Febrero = Лютий \n Marzo = Березень \n Abril = Квітень \n Mayo = Травень \n Junio = Червень",
+                            " Julio = Липень \n Agosto = Січень \n Septiembre = Вересень \n Octubre = Жовтень \n Noviembre = Листопад \n Diciembre = Грудень",
+                            " El invierno = Зима \n La primavera = Весна \n El verano = Літо \n El otoño = Осінь")
 
 
 # 4 answer buttons
 
 def ans_button1_clicked():
-    global true_or_false
-    true_or_false(1)
+    global answer_verification
+    answer_verification(1)
 
 def ans_button2_clicked():
-    global true_or_false
-    true_or_false(2)
+    global answer_verification
+    answer_verification(2)
 
 def ans_button3_clicked():
-    global true_or_false
-    true_or_false(3)
+    global answer_verification
+    answer_verification(3)
 
 def ans_button4_clicked():
-    global true_or_false
-    true_or_false(4)
+    global answer_verification
+    answer_verification(4)
 
 
 # When a button was clicked
@@ -1971,10 +2256,12 @@ button08.clicked.connect(menu_button8)
 button09.clicked.connect(menu_button9)
 button10.clicked.connect(menu_button10)
 button11.clicked.connect(menu_button11)
-button12.clicked.connect(ex12)
+button12.clicked.connect(test_exercice)
 
+change_of_language_button.clicked.connect(next_language)
 ok_button.clicked.connect(ok_button_clicked)
-send_answer_button.clicked.connect(true_or_false)
+send_answer_button.clicked.connect(answer_verification)
+next_button.clicked.connect(next_page_of_lesson)
 
 ans_button1.clicked.connect(ans_button1_clicked)
 ans_button2.clicked.connect(ans_button2_clicked)
@@ -1982,55 +2269,8 @@ ans_button3.clicked.connect(ans_button3_clicked)
 ans_button4.clicked.connect(ans_button4_clicked)
 
 quit_button.clicked.connect(finish_exercice)
-lessons_button.clicked.connect(lessons_button_clicked)
+menu_mode_button.clicked.connect(menu_mode_button_clicked)
 
-
-# Buttons parameters
-
-button01.setFont(QFont("Arial", 10))
-button02.setFont(QFont("Arial", 10))
-button03.setFont(QFont("Arial", 10))
-button04.setFont(QFont("Arial", 10))
-button05.setFont(QFont("Arial", 10))
-button06.setFont(QFont("Arial", 10))
-button07.setFont(QFont("Arial", 10))
-button08.setFont(QFont("Arial", 10))
-button09.setFont(QFont("Arial", 10))
-button10.setFont(QFont("Arial", 10))
-button11.setFont(QFont("Arial", 10))
-button12.setFont(QFont("Arial", 10))
-
-button01.setFixedSize(165, 90)
-button02.setFixedSize(165, 90)
-button03.setFixedSize(165, 90)
-button04.setFixedSize(165, 90)
-button05.setFixedSize(165, 90)
-button06.setFixedSize(165, 90)
-button07.setFixedSize(165, 90)
-button08.setFixedSize(165, 90)
-button09.setFixedSize(165, 90)
-button10.setFixedSize(165, 90)
-button11.setFixedSize(165, 90)
-button12.setFixedSize(165, 90)
-
-
-ans_button1.setFixedSize(250, 80)
-ans_button2.setFixedSize(250, 80)
-ans_button3.setFixedSize(250, 80)
-ans_button4.setFixedSize(250, 80)
-
-ans_button1.setFont(QFont("Arial", 20))
-ans_button2.setFont(QFont("Arial", 20))
-ans_button3.setFont(QFont("Arial", 20))
-ans_button4.setFont(QFont("Arial", 20))
-
-lessons_button.setFont(QFont("Arial", 15))
-
-ok_button.setFixedSize(165, 80)
-line.setFixedSize(570, 40)
-send_answer_button.setFixedSize(100, 40)
-quit_button.setFixedSize(100, 40)
-lessons_button.setFixedSize(150, 70)
 
 # Adding to layouts
 
@@ -2049,9 +2289,9 @@ layout3.addWidget(button10, alignment = Qt.AlignCenter)
 layout3.addWidget(button11, alignment = Qt.AlignCenter)
 layout3.addWidget(button12, alignment = Qt.AlignCenter)
 
-layout3.addWidget(nothing4, alignment = Qt.AlignCenter)
+layout3.addWidget(change_of_language_button, alignment = Qt.AlignCenter)
 
-true_answer_layout.addWidget(true_answer,  alignment = Qt.AlignCenter)
+bottom_comments_layout.addWidget(bottom_comments_label,  alignment = Qt.AlignCenter)
 layout2.addWidget(ok_button,  alignment = Qt.AlignCenter)
 
 ans_layout1.addWidget(ans_button1, alignment = Qt.AlignCenter)
@@ -2059,24 +2299,25 @@ ans_layout1.addWidget(ans_button2, alignment = Qt.AlignCenter)
 ans_layout2.addWidget(ans_button3, alignment = Qt.AlignCenter)
 ans_layout2.addWidget(ans_button4, alignment = Qt.AlignCenter)
 
-ans_layout2.addWidget(line, alignment = Qt.AlignCenter)
+ans_layout2.addWidget(answer_line, alignment = Qt.AlignCenter)
+ans_layout2.addWidget(next_button, alignment = Qt.AlignCenter)
 ans_layout2.addWidget(send_answer_button, alignment = Qt.AlignCenter)
 
-stats_layout.addWidget(lessons_button, alignment = Qt.AlignCenter)
-stats_layout.addWidget(quit_button, alignment = Qt.AlignCenter)
-stats_layout.addWidget(nothing1, alignment = Qt.AlignCenter)
-stats_layout.addWidget(top_of_screen, alignment = Qt.AlignCenter)
-stats_layout.addWidget(stats, alignment = Qt.AlignCenter)
-stats_layout.addWidget(nothing3, alignment = Qt.AlignCenter)
+top_layout.addWidget(menu_mode_button, alignment = Qt.AlignCenter)
+top_layout.addWidget(quit_button, alignment = Qt.AlignCenter)
+top_layout.addWidget(nothing1, alignment = Qt.AlignCenter)
+top_layout.addWidget(top_of_screen, alignment = Qt.AlignCenter)
+top_layout.addWidget(stats, alignment = Qt.AlignCenter)
+top_layout.addWidget(nothing2, alignment = Qt.AlignCenter)
 
-nothing_layout.addWidget(nothing2, alignment = Qt.AlignCenter)
+top_comments_layout.addWidget(top_comments_label, alignment = Qt.AlignCenter)
 
 
 # Connecting layouts
 
-main_layout.addLayout(stats_layout)
-main_layout.addLayout(nothing_layout)
-main_layout.addLayout(true_answer_layout)
+main_layout.addLayout(top_layout)
+main_layout.addLayout(top_comments_layout)
+main_layout.addLayout(bottom_comments_layout)
 main_layout.addLayout(ans_layout1)
 main_layout.addLayout(ans_layout2)
 main_layout.addLayout(layout1)
