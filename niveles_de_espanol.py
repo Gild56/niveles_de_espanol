@@ -2095,7 +2095,7 @@ def menu_button2():
                             " ESTAR \n \n Estoy \n Estás \n Está \n Estámos \n Estáis \n Están",
                             "    Неможна здогадатися, що дієслово неправильне, \n але це можна вивщити. Тож вивчай неправильні \n дієслова напам'ять :) \n TENER = мати / володіти \n SER // ESTAR = бути (дивитися на різницю в уроці №7) \n IR = йти / їхати / переміщатися")
 
-def menu_button3(): #TODO: translate
+def menu_button3():
     global menu_mode, language
     if menu_mode:
         exercice3()
@@ -2105,11 +2105,11 @@ def menu_button3(): #TODO: translate
                             "         V + SE \n ME + V Conjugué \n TE + V Conjugué \n SE + V Conjugué \n NOS + V Conjugué \n OS + V Conjugué \n SE + V Conjugué",
                             " DORMIRSE = s'endormir \n LLEVANTARSE = se lever \n LLAMARSE = s'appeller")
         elif language == 2:
-            open_a_lesson(  "    Avec les verbes pronominaux tout est relativement simple: \n la particule de 'pronominalisation' SE se colle derrière \n à l'infinitif, donc il est très simple de voir qu'un verbe est \n pronominal. Puis, en conjuguant le verbe on la met devant, \n en la changeant. Voici les formes de cette particule:",
-                            "         V + SE \n ME + Спряжене Дієслово \n TE + Спряжене Дієслово \n SE + Спряжене Дієслово \n NOS + Спряжене Дієслово \n OS + Спряжене Дієслово \n SE + Спряжене Дієслово",
+            open_a_lesson(  " З дієсловами займенникового відтінку все відносно \n просто: частку 'прономіналізації' SE додають після \n інфінітива, тому дуже легко побачити, що дієслово є \n займенниковим. Потім, при кон'югації дієслова, вона \n ставиться перед ним, змінюючи свою форму. Ось форми \n цієї частки:",
+                            "         Дієслово + SE \n ME + Спряжене Дієслово \n TE + Спряжене Дієслово \n SE + Спряжене Дієслово \n NOS + Спряжене Дієслово \n OS + Спряжене Дієслово \n SE + Спряжене Дієслово",
                             " DORMIRSE = засипати \n LLEVANTARSE = вставати \n LLAMARSE = дзвонити / звати / кликати")
 
-def menu_button4(): #TODO: translate
+def menu_button4():
     global menu_mode, language
     if menu_mode:
         exercice4()
@@ -2119,11 +2119,11 @@ def menu_button4(): #TODO: translate
                             " dOrmir \n dUErmo \n dUErmes \n dUErme \n dOrmemos \n dOrmís \n dUErmen",
                             " PODER = pouvoir \n PENSAR = penser \n JUGAR = jouer")
         elif language == 2:
-            open_a_lesson(  "    On ne peut pas reconnaître un verbe à diphtongue, \n mais on peut l'apprendre. \n Tout dépend de la lettre qui 'diphtongue': \n 1ère possibilité: O -> UE \n 2ème possibilité: I -> IE \n 3ème possibilité: E -> UE \n    Et souviens-toi que les verbes ne 'diphtonguent' pas \n a la 1aère et 2ème du pluriel :)",
+            open_a_lesson(  "    Можна не впізнати дієслово з дифтонгом, \n але можна його вивчити. \n Все залежить від літери, яка утворює дифтонг: \n 1-а можливість: O -> UE \n 2-а можливість: I -> IE \n 3-я можливість: E -> UE \n І пам'ятай, що дієслова не утворюють дифтонгу \n в першій та другій особі множини :)",
                             " dOrmir \n dUErmo \n dUErmes \n dUErme \n dOrmemos \n dOrmís \n dUErmen",
-                            " PODER = pouvoir \n PENSAR = penser \n JUGAR = jouer")
+                            " PODER = мігти \n PENSAR = думати \n JUGAR = грати")
 
-def menu_button5(): #TODO: translate
+def menu_button5():
     global menu_mode, language
     if menu_mode:
         exercice5()
@@ -2133,11 +2133,11 @@ def menu_button5(): #TODO: translate
                             "EXEMPLE: \n   pEdIr \n   pIdO \n   pIdES \n   pIdE \n   pEdIMOS \n   pEdÍS \n   pIdEN",
                             "MEDIR = mesurer \n VESTIR = vêtir/habiller \n PEDIR = demander")
         elif language == 2:
-            open_a_lesson(  "    Avec les verbes affaiblissement c'est pareil que avec \n ceux à diphtongue: on ne peut pas le reconnaître. Mais dès \n que l'on connaît que un verbe est affaiblissement il est \n très simple de le conjuguer: en echangeant le I et le E \n (sauf pour nous et vous, comme pour la diphtongue). \n Il est aussi important de noter que un verbe pronominal \n peut être à diphtongue (comme dormirse = s'endormir) ou \n affaiblissement (comme vestirse = se vêtir/s'habiller).",
-                            "EXEMPLE: \n   pEdIr \n   pIdO \n   pIdES \n   pIdE \n   pEdIMOS \n   pEdÍS \n   pIdEN",
-                            "MEDIR = mesurer \n VESTIR = vêtir/habiller \n PEDIR = demander")
+            open_a_lesson(  "    Зі слабкими дієсловами все так само, як і з дієсловами \n з дифтонгом: їх важко впізнати. Але якщо ми знаємо, що \n дієслово є слабким, його дуже легко спрямовувати: ми \n міняємо I на E (за винятком для нас та вас, так само, як \n для дифтонгу). Також важливо зауважити, що \n займенникове дієслово може мати дифтонг \n (як dormirse = засипати) або слабку голосну \n (як vestirse = одягатися).",
+                            "ПРИКЛАД: \n   pEdIr \n   pIdO \n   pIdES \n   pIdE \n   pEdIMOS \n   pEdÍS \n   pIdEN",
+                            "MEDIR = вимірювати \n VESTIR = одягати \n PEDIR = просити")
 
-def menu_button6(): #TODO: translate
+def menu_button6():
     global menu_mode, language
     if menu_mode:
         exercice6()
@@ -2146,10 +2146,10 @@ def menu_button6(): #TODO: translate
             open_a_lesson(  "    On étudie deux formes d'impératif: toi et vous. Pour la \n première il suffit de mettre le verbe à la 3ème du \n singulier. Pour la deuxième on utilise la formule \n V à'linfinitif - R + D. Voilà quelques exemples:",
                             " BEBER (boire) -> bebe / bebed \n CAMINAR (marcher/cheminer) -> camina / caminad \n SALIR (sortir) -> sale / salid")
         elif language == 2:
-            open_a_lesson(  "    On étudie deux formes d'impératif: toi et vous. Pour la \n première il suffit de mettre le verbe à la 3ème du \n singulier. Pour la deuxième on utilise la formule \n V à'linfinitif - R + D. Voilà quelques exemples:",
-                            " BEBER (boire) -> bebe / bebed \n CAMINAR (marcher/cheminer) -> camina / caminad \n SALIR (sortir) -> sale / salid")
+            open_a_lesson(  "    Ми вивчаємо дві форми імперативу: для тебе та вас. \n Для першої достатньо поставити дієслово у 3-й особі \n однини. Для другої використовується формула дієслово \n в інфінітиві - R + D. Ось кілька прикладів:",
+                            " BEBER (пити) -> bebe / bebed \n CAMINAR (йти) -> camina / caminad \n SALIR (вийти) -> sale / salid")
 
-def menu_button7(): #TODO: translate
+def menu_button7():
     global menu_mode, language
     if menu_mode:
         exercice7()
@@ -2158,10 +2158,10 @@ def menu_button7(): #TODO: translate
             open_a_lesson(  "    On utilise SER pour décrire quelquechose qui ne change \n pas (ou rarement), comme une maladie chronique, une \n nationalité (et d'où on vient), un métier, mais aussi dire \n l'endroit où se trouve une capitale, un anniversaire, quelle \n heure il est, comment est la météo ou encore qui est \n mon (meilleur) ami.",
                             "  Quant à ESTAR, on l'utilise pour décrire quelquechose qui \n change, comme une humeur ou un sentiment, l'état d'un \n lieu, là où quelquechose ou quelqun se trouve, etc...")
         elif language == 2:
-            open_a_lesson(  "    On utilise SER pour décrire quelquechose qui ne change \n pas (ou rarement), comme une maladie chronique, une \n nationalité (et d'où on vient), un métier, mais aussi dire \n l'endroit où se trouve une capitale, un anniversaire, quelle \n heure il est, comment est la météo ou encore qui est \n mon (meilleur) ami.",
-                            "  Quant à ESTAR, on l'utilise pour décrire quelquechose qui \n change, comme une humeur ou un sentiment, l'état d'un \n lieu, là où quelquechose ou quelqun se trouve, etc...")
+            open_a_lesson(  "    Ми використовуємо 'бути' (SER) для опису чогось, що \n не змінюється (або рідко змінюється), наприклад, \n хронічна хвороба, національність (і місце народження), \n професія, а також для вказівки на місце розташування \n столиці, дату народження, час, погодні умови або \n навіть, хто мій (найкращий) друг.",
+                            "  Щодо ESTAR, його використовують для опису чогось \n змінного, такого як настрій чи почуття, стан місця, \n де щось або хтось знаходиться, тощо.")
 
-def menu_button8(): #TODO: translate
+def menu_button8():
     global menu_mode, language
     if menu_mode:
         exercice8()
@@ -2173,7 +2173,7 @@ def menu_button8(): #TODO: translate
                             " 20 = veinte \n 21 = ventiuno \n 22 = ventidós \n 23 = ventitrés \n 24 = ventiquatro \n 25 = venticinco \n 26 = ventiséis \n 27 = ventisiete \n 28 = ventiocho \n 29 = ventinueve",
                             " 30 = trienta \n 40 = cuatenta \n 50 = cincuenta \n 60 = sesenta \n 70 = setenta \n 80 = ochenta \n 90 = noventa \n 100 = cien \n 1 000 = mil \n 1 000 000 = millón")
         elif language == 2:
-            open_a_lesson(  "    Il faudra aussi apprendre les chiffres: de 0 à 29 sont \n irréguliés. Puis, il suffira d'apprendre 30, 40, 50, etc... \n et rajouter 'y' puis le nombre d'unités, que tu auras appri. \n C'est pareil pour les centaines, les milliers, \n les millions, etc...",
+            open_a_lesson(  "    Тобі також доведеться вивчити цифри: від 0 до 29 \n неправильні. Потім, треба буде тільки вивчити \n цифри 30, 40, 50... , написати 'y' та кількість одиниць, що \n ти вивчив/чила. Теж саме для сотень, тисач, мілліонів і \n так далі.",
                             " 0 = zero \n 1 = uno \n 2 = dos \n 3 = tres \n 4 = quatro \n 5 = cinco \n 6 = seis \n 7 = siete \n 8 = ocho \n 9 = nueve",
                             " 10 = diez \n 11 = once \n 12 = doce \n 13 = trece \n 14 = catorce \n 15 = quince \n 16 = dieciséis \n 17 = diecisiete \n 18 = dieciocho \n 19 = diecinueve",
                             " 20 = veinte \n 21 = ventiuno \n 22 = ventidós \n 23 = ventitrés \n 24 = ventiquatro \n 25 = venticinco \n 26 = ventiséis \n 27 = ventisiete \n 28 = ventiocho \n 29 = ventinueve",
@@ -2195,7 +2195,7 @@ def menu_button9():
                             "    África = Африка \n Marruecos = Марокко \n Algeria = Алжерія \n \n   Oceanía = Океанія \n Australia = Австралія \n Nueva Zelanda = Нова Зеландія",
                             "    Europa = Європа\n España = Іспанія \n Francia = Франція \n \n    Asia = Азія \n China = Китай \n India = Індія")
 
-def menu_button10(): #TODO: translate
+def menu_button10():
     global menu_mode, language
     if menu_mode:
         exercice10()
@@ -2204,7 +2204,7 @@ def menu_button10(): #TODO: translate
             open_a_lesson(  "    Il est très simple de mettre un mot au pluriel, si l'on \n connaît la règle. Premièrement, il faut le faire pour \n son article: 'la' devient 'las' et 'el' devient 'los'. \n Après avoir fait cela on passe au nom. S'il se termine \n par une voyelle, il suffit juste de mettre 's' à la fin de \n ce mot. S'il se termine par un 'z' on l'enlève on met \n 'ces' à la place. Et si ce mot se termine par toute autre \n consonne on lui colle 'es'. Il est aussi important de noter \n que 'un' et 'una' ne se mettent pas au pluriel, on n'écrit \n rien. Voilà quelques exemles:",
                             "la abuela -> las abuelas \n el perro -> los perros \n la madre -> las madres \n \n la edad -> las edades \n el lugar -> los lugares \n el móvil -> los moviles \n \n el lápiz -> los lapices \n la nariz -> las narices \n la voz -> las voces")
         elif language == 2:
-            open_a_lesson(  "    Il est très simple de mettre un mot au pluriel, si l'on \n connaît la règle. Premièrement, il faut le faire pour \n son article: 'la' devient 'las' et 'el' devient 'los'. \n Après avoir fait cela on passe au nom. S'il se termine \n par une voyelle, il suffit juste de mettre 's' à la fin de \n ce mot. S'il se termine par un 'z' on l'enlève on met \n 'ces' à la place. Et si ce mot se termine par toute autre \n consonne on lui colle 'es'. Il est aussi important de noter \n que 'un' et 'una' ne se mettent pas au pluriel, on n'écrit \n rien. Voilà quelques exemles:",
+            open_a_lesson(  "    Поставити слово у множину це дуже просто, якщо ти \n знаєш правило. Спочатку потрібно змінити його артикль: 'la' \n стає 'las', а 'el' стає 'los'. Після цього переходимо \n до іменника. Якщо він закінчується на голосну, просто \n додаємо 's' в кінець цього слова. Якщо він закінчується \n на 'z', ми видаляємо 'z' і ставимо 'ces' на його місце. І \n якщо це слово закінчується на будь-яку іншу приголосну, \n ми додаємо до нього 'es'. Також важливо зазначити, що \n 'un' і 'una' не утворюють множини, ми не пишемо нічого. \n Ось кілька прикладів:",
                             "la abuela -> las abuelas \n el perro -> los perros \n la madre -> las madres \n \n la edad -> las edades \n el lugar -> los lugares \n el móvil -> los moviles \n \n el lápiz -> los lapices \n la nariz -> las narices \n la voz -> las voces")
 
 def menu_button11():
