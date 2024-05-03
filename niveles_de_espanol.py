@@ -40,7 +40,7 @@ click = pygame.mixer.Sound(resource_path("8bitclick.wav"))
 no = pygame.mixer.Sound(resource_path("no.mp3"))
 si = pygame.mixer.Sound(resource_path("si.mp3"))
 exercice_music = pygame.mixer.Sound(resource_path("el_rio_fluye.mp3"))
-test_music = pygame.mixer.Sound(resource_path("test.mp3"))
+test_music = pygame.mixer.Sound(resource_path("demon_slayer_cats_instrumental.mp3"))
 lesson_music = pygame.mixer.Sound(resource_path("glorious_morning.mp3"))
 
 exercice_music.set_volume(0.3)
@@ -95,8 +95,7 @@ bottom_comments_label = QLabel("")
 top_of_screen = QLabel("Niveles de Español")
 stats = QLabel("v.1.2" + "\n"
     "Nota : -" + "\n"
-    "Un juego @gild56gmd" + "\n"
-    "Por Mme Auregan <3")
+    "Un juego @gild56gmd")
 
 stats.setFont(QFont("Arial", 7))
 top_of_screen.setFont(QFont("Impact", 17))
@@ -315,8 +314,7 @@ def note_calculating():
 
         stats.setText("v.1.2" + "\n"
             "Nota : " + str(note) + "\n"
-            "Un juego de @gild56gmd" + "\n"
-            "Por Mme Auregan <3")
+            "Un juego de @gild56gmd")
 
     if test == True:
         for i in range(len(test_notes)):
@@ -1797,42 +1795,79 @@ def exercice9():
     global exercice
     exercice = 9
     random_question = randint(1, 12)
+    if language == 2:
+        if random_question == 1:
+            typing_answer_mode("Перу", "perú")
 
-    if random_question == 1:
-        typing_answer_mode("Перу", "perú")
+        elif random_question == 2:
+            typing_answer_mode("Чілі", "chile")
 
-    elif random_question == 2:
-        typing_answer_mode("Чілі", "chile")
+        elif random_question == 3:
+            typing_answer_mode("Сполучені Штати Америки", "estados unidos")
 
-    elif random_question == 3:
-        typing_answer_mode("Сполучені Штати Америки", "estados unidos")
+        elif random_question == 4:
+            typing_answer_mode("Канада", "canadá")
 
-    elif random_question == 4:
-        typing_answer_mode("Канада", "canadá")
+        elif random_question == 5:
+            typing_answer_mode("Марокко", "marruecos")
 
-    elif random_question == 5:
-        typing_answer_mode("Марокко", "marruecos")
+        elif random_question == 6:
+            typing_answer_mode("Алжерія", "argelia")
 
-    elif random_question == 6:
-        typing_answer_mode("Алжерія", "argelia")
+        elif random_question == 7:
+            typing_answer_mode("Австралія", "australia")
 
-    elif random_question == 7:
-        typing_answer_mode("Австралія", "australia")
+        elif random_question == 8:
+            typing_answer_mode("Нова зеландія", "nueva zelanda")
 
-    elif random_question == 8:
-        typing_answer_mode("Нова зеландія", "nueva zelanda")
+        elif random_question == 9:
+            typing_answer_mode("Іспанія", "españa")
 
-    elif random_question == 9:
-        typing_answer_mode("Іспанія", "españa")
+        elif random_question == 10:
+            typing_answer_mode("Франція", "francia")
 
-    elif random_question == 10:
-        typing_answer_mode("Франція", "francia")
+        elif random_question == 11:
+            typing_answer_mode("Китай", "china")
 
-    elif random_question == 11:
-        typing_answer_mode("Китай", "china")
+        else:
+            typing_answer_mode("Індія", "india")
 
-    else:
-        typing_answer_mode("Індія", "india")
+    elif language == 1:
+        if random_question == 1:
+            typing_answer_mode("Pérou", "perú")
+
+        elif random_question == 2:
+            typing_answer_mode("Chili", "chile")
+
+        elif random_question == 3:
+            typing_answer_mode("Etats Unis d'Amérique", "estados unidos")
+
+        elif random_question == 4:
+            typing_answer_mode("Canada", "canadá")
+
+        elif random_question == 5:
+            typing_answer_mode("Maroque", "marruecos")
+
+        elif random_question == 6:
+            typing_answer_mode("Algérie", "argelia")
+
+        elif random_question == 7:
+            typing_answer_mode("Australie", "australia")
+
+        elif random_question == 8:
+            typing_answer_mode("Nouvelle Zélande", "nueva zelanda")
+
+        elif random_question == 9:
+            typing_answer_mode("Espagne", "españa")
+
+        elif random_question == 10:
+            typing_answer_mode("France", "francia")
+
+        elif random_question == 11:
+            typing_answer_mode("Chine", "china")
+
+        else:
+            typing_answer_mode("Inde", "india")
 
 def exercice10():
     global exercice
@@ -1870,7 +1905,7 @@ def exercice11():
     global exercice
     exercice = 11
     random_question = randint(1, 23)
-    if language == 1:
+    if language == 2:
         if random_question == 1:
             typing_answer_mode("понеділок", "lunes")
 
