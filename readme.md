@@ -13,6 +13,7 @@ Welcome to Niveles de Español, my latest project aimed at helping users enjoy w
 ## Using
 
 To start using this project:
+
 1. Open the `niveles_de_espanol.exe` executable file or launch the `niveles_de_espanol.py` Python script.
 2. Explore the interactive interface and begin your Spanish learning journey!
 
